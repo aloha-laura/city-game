@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# City Game - Team Management Application
 
-## Getting Started
+Web application to organize city games with team and player management.
 
-First, run the development server:
+## Architecture
+
+The project follows a simplified **Domain-Driven Design (DDD)** architecture:
+
+```
+city-game/
+├── domain/              # Pure business logic
+│   ├── entities/        # Entities with validation
+│   └── types.ts         # TypeScript types
+│
+├── application/         # Business services
+│   ├── player.service.ts
+│   ├── team.service.ts
+│   └── session.service.ts
+│
+├── infrastructure/      # Data access
+│   └── database.ts      # Supabase configuration
+│
+├── app/                 # Next.js pages
+│   ├── page.tsx         # Home page
+│   ├── admin/           # Admin interface
+│   ├── player/          # Player interface
+│   └── api/             # API Routes
+│
+├── components/          # Reusable components
+└── database/            # SQL scripts
+```
+
+## Prerequisites
+
+- Node.js 18+ and npm
+- A Supabase account (free)
+
+## Installation
+
+### 1. Create a Supabase project and configure the database
+
+1. Go to [supabase.com](https://supabase.com)
+2. Create an account and a new project
+3. In the **SQL Editor** tab
+4. Open the `database/schema.sql` file from this project
+5. Copy all the content of `database/schema.sql` and run it in the SQL editor
+6. Configure the environment variables:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
+
+### 2. Install dependencies
+
+```bash
+npm install
+```
+
+### 3. Run the application locally
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The application will be accessible at [http://localhost:3000](http://localhost:3000)
