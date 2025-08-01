@@ -16,4 +16,9 @@ export const TABLES = {
   PLAYERS: 'players',
   TEAMS: 'teams',
   TEAM_ASSIGNMENTS: 'team_assignments',
+  PHOTOS: 'photos',
+} as const;
+
+export const STORAGE_BUCKETS = {
+  PHOTOS: 'photos',
 } as const;

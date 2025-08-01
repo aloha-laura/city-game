@@ -1,4 +1,5 @@
 export type PlayerRole = 'admin' | 'player';
+export type PhotoStatus = 'pending' | 'approved' | 'rejected';
 
 export interface Session {
   id: string;
@@ -19,7 +20,20 @@ export interface Team {
   sessionId: string;
   name: string;
   color?: string;
+  points: number;
   createdAt: Date;
+}
+
+export interface Photo {
+  id: string;
+  sessionId: string;
+  photographerId: string;
+  targetPlayerId: string;
+  imageUrl: string;
+  status: PhotoStatus;
+  createdAt: Date;
+  reviewedAt?: Date;
+  reviewedBy?: string;
 }
 
 export interface TeamAssignment {
@@ -34,4 +48,9 @@ export interface PlayerWithTeam extends Player {
 
 export interface TeamWithPlayers extends Team {
   players: Player[];
+}
+
+export interface PhotoWithDetails extends Photo {
+  photographer: Player;
+  targetPlayer: Player;
 }
