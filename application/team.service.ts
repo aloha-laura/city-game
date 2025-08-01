@@ -33,6 +33,7 @@ export class TeamService {
       sessionId: data.session_id,
       name: data.name,
       color: data.color,
+      points: data.points || 0,
       createdAt: new Date(data.created_at),
     };
   }
@@ -54,6 +55,7 @@ export class TeamService {
       sessionId: row.session_id,
       name: row.name,
       color: row.color,
+      points: row.points || 0,
       createdAt: new Date(row.created_at),
     }));
   }
@@ -74,8 +76,63 @@ export class TeamService {
       sessionId: data.session_id,
       name: data.name,
       color: data.color,
+      points: data.points || 0,
       createdAt: new Date(data.created_at),
     };
+  }
+
+  static async incrementTeamPoints(teamId: string): Promise<boolean> {
+    const { error } = await supabase.rpc('increment_team_points', {
+      team_id: teamId,
+    });
+
+    if (error) {
+      const team = await this.getTeamById(teamId);
+      if (!team) return false;
+
+      const { error: updateError } = await supabase
+        .from(TABLES.TEAMS)
+        .update({ points: team.points + 1 })
+        .eq('id', teamId);
+
+      if (updateError) {
+        console.error('Error incrementing team points:', updateError);
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  static async getTeamWithMembers(teamId: string): Promise<TeamWithPlayers | null> {
+    const team = await this.getTeamById(teamId);
+    if (!team) return null;
+
+    const { data, error } = await supabase
+      .from(TABLES.TEAM_ASSIGNMENTS)
+      .select(
+        `
+        player_id,
+        players (*)
+      `
+      )
+      .eq('team_id', teamId);
+
+    if (error) {
+      console.error('Error fetching team members:', error);
+      return { ...team, players: [] };
+    }
+
+    const players =
+      data?.map((assignment: any) => ({
+        id: assignment.players.id,
+        sessionId: assignment.players.session_id,
+        name: assignment.players.name,
+        role: assignment.players.role,
+        createdAt: new Date(assignment.players.created_at),
+      })) || [];
+
+    return { ...team, players };
   }
 
   static async assignPlayerToTeam(

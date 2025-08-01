@@ -97,11 +97,52 @@ export class PlayerService {
         sessionId: teamData.session_id,
         name: teamData.name,
         color: teamData.color,
+        points: teamData.points || 0,
         createdAt: new Date(teamData.created_at),
       };
     }
 
     return player;
+  }
+
+  static async getOpponentPlayers(playerId: string): Promise<Player[]> {
+    const player = await this.getPlayerWithTeam(playerId);
+    if (!player) return [];
+
+    if (!player.team) {
+      return [];
+    }
+
+    const { data, error } = await supabase
+      .from(TABLES.PLAYERS)
+      .select(
+        `
+        *,
+        team_assignments (
+          team_id
+        )
+      `
+      )
+      .eq('session_id', player.sessionId)
+      .neq('id', playerId);
+
+    if (error || !data) {
+      console.error('Error fetching opponent players:', error);
+      return [];
+    }
+
+    const opponents = data.filter((row) => {
+      if (!row.team_assignments) return false;
+      return row.team_assignments.team_id !== player.team!.id;
+    });
+
+    return opponents.map((row) => ({
+      id: row.id,
+      sessionId: row.session_id,
+      name: row.name,
+      role: row.role,
+      createdAt: new Date(row.created_at),
+    }));
   }
 
   static async getPlayersBySession(sessionId: string): Promise<Player[]> {
@@ -177,6 +218,7 @@ export class PlayerService {
           sessionId: teamData.session_id,
           name: teamData.name,
           color: teamData.color,
+          points: teamData.points || 0,
           createdAt: new Date(teamData.created_at),
         };
       }
