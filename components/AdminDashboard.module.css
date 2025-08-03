@@ -157,10 +157,26 @@
   padding: var(--spacing-lg);
 }
 
+.teamHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
 .teamName {
   font-size: var(--font-size-xl);
   color: var(--color-text-primary);
-  margin-bottom: var(--spacing-md);
+  margin: 0;
+}
+
+.teamPoints {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background: var(--color-background);
+  border-radius: var(--border-radius-full);
 }
 
 .teamPlayers {

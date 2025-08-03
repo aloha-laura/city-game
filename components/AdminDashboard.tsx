@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import styles from './AdminDashboard.module.css';
+import AdminPhotoReview from './AdminPhotoReview';
 import { PlayerWithTeam, TeamWithPlayers } from '@/domain/types';
 
 type AdminDashboardProps = {
@@ -122,6 +123,13 @@ export default function AdminDashboard({ playerId }: AdminDashboardProps) {
   return (
     <div className={styles.container}>
       <section className={styles.section}>
+        <h2 className={styles.sectionTitle}>Photo Review</h2>
+        {sessionId && (
+          <AdminPhotoReview sessionId={sessionId} reviewerId={playerId} />
+        )}
+      </section>
+
+      <section className={styles.section}>
         <h2 className={styles.sectionTitle}>Players</h2>
         {players.length === 0 ? (
           <p className={styles.emptyMessage}>No players yet</p>
@@ -194,7 +202,12 @@ export default function AdminDashboard({ playerId }: AdminDashboardProps) {
                 className={styles.teamCard}
                 style={{ borderLeftColor: team.color }}
               >
-                <h3 className={styles.teamName}>{team.name}</h3>
+                <div className={styles.teamHeader}>
+                  <h3 className={styles.teamName}>{team.name}</h3>
+                  <span className={styles.teamPoints}>
+                    {team.points} {team.points === 1 ? 'point' : 'points'}
+                  </span>
+                </div>
                 <div className={styles.teamPlayers}>
                   {team.players.length === 0 ? (
                     <p className={styles.emptyTeam}>No players</p>

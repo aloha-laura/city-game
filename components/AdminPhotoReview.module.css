@@ -1,0 +1,176 @@
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.title {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.counter {
+  background-color: var(--color-secondary);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.loading {
+  text-align: center;
+  padding: var(--spacing-xl);
+  color: var(--color-text-secondary);
+}
+
+.error {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: var(--border-radius-sm);
+  padding: var(--spacing-md);
+  color: #c33;
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.emptyState {
+  text-align: center;
+  padding: var(--spacing-xl);
+  background: white;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.emptyState h2 {
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.emptyState p {
+  color: var(--color-text-secondary);
+}
+
+.photoCard {
+  background: white;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  margin-bottom: var(--spacing-lg);
+}
+
+.photoWrapper {
+  width: 100%;
+  padding-top: 75%;
+  position: relative;
+  background-color: var(--color-secondary);
+}
+
+.photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.photoInfo {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.infoRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.infoRow:last-child {
+  margin-bottom: 0;
+}
+
+.label {
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.value {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+.rejectButton,
+.approveButton {
+  padding: var(--spacing-lg);
+  border: none;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.rejectButton {
+  background-color: #fee;
+  color: #c33;
+}
+
+.rejectButton:hover:not(:disabled) {
+  background-color: #fdd;
+}
+
+.approveButton {
+  background-color: #efe;
+  color: #3c3;
+}
+
+.approveButton:hover:not(:disabled) {
+  background-color: #dfd;
+}
+
+.rejectButton:disabled,
+.approveButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.navigation {
+  display: flex;
+  gap: var(--spacing-md);
+  justify-content: center;
+}
+
+.navButton {
+  background-color: white;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.navButton:hover:not(:disabled) {
+  background-color: var(--color-secondary);
+}
+
+.navButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
