@@ -50,9 +50,15 @@
   text-align: center;
 }
 
+.teamSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
 .teamBadge {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: var(--spacing-xl);
   border-radius: var(--border-radius-lg);
@@ -64,6 +70,74 @@
   font-weight: var(--font-weight-bold);
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.teamPoints {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.teamMembers {
+  background: var(--color-surface);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-lg);
+}
+
+.membersTitle {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.membersList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.member {
+  padding: var(--spacing-sm);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-base);
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+}
+
+.captureButton,
+.galleryButton {
+  padding: var(--spacing-md);
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.captureButton {
+  background-color: var(--color-primary);
+  color: white;
+}
+
+.captureButton:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.galleryButton {
+  background-color: var(--color-secondary);
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.galleryButton:hover {
+  background-color: var(--color-secondary-dark);
 }
 
 .noTeam {
