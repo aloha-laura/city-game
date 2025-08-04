@@ -6,7 +6,7 @@ import styles from './page.module.css';
 
 export default function AdminPage() {
   const params = useParams();
-  const playerId = params.playerId as string;
+  const adminPlayerId = params.adminPlayerId as string;
 
   return (
     <div className={styles.container}>
@@ -16,7 +16,7 @@ export default function AdminPage() {
           Manage players and create teams
         </p>
       </header>
-      <AdminDashboard playerId={playerId} />
+      <AdminDashboard playerId={adminPlayerId} />
     </div>
   );
 }

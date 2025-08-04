@@ -6,11 +6,11 @@ import styles from './page.module.css';
 
 export default function PlayerPage() {
   const params = useParams();
-  const playerId = params.playerId as string;
+  const currentPlayerId = params.currentPlayerId as string;
 
   return (
     <div className={styles.container}>
-      <PlayerDashboard playerId={playerId} />
+      <PlayerDashboard playerId={currentPlayerId} />
     </div>
   );
 }
