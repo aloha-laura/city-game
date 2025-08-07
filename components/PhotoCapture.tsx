@@ -250,7 +250,7 @@ export default function PhotoCapture({ playerId }: PhotoCaptureProps) {
     }
   };
 
-  const handleCancel = () => {
+  const handleRetake = async () => {
     setCapturedFile(null);
     setPreviewUrl(null);
     setSelectedOpponent('');
@@ -258,6 +258,7 @@ export default function PhotoCapture({ playerId }: PhotoCaptureProps) {
     if (previewUrl) {
       URL.revokeObjectURL(previewUrl);
     }
+    await startCamera();
   };
 
   return (
@@ -322,7 +323,7 @@ export default function PhotoCapture({ playerId }: PhotoCaptureProps) {
                 className={styles.preview}
               />
               <button
-                onClick={handleCancel}
+                onClick={handleRetake}
                 className={styles.retakeButton}
                 disabled={isLoading}
               >
