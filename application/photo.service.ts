@@ -19,11 +19,7 @@ export class PhotoService {
 
     if (error) {
       console.error('Supabase Storage error:', error);
-      console.error('Error details:', {
-        message: error.message,
-        statusCode: error.statusCode,
-        error: error.error,
-      });
+      console.error('Error message:', error.message);
       return null;
     }
 

@@ -6,7 +6,8 @@ export class Team {
     public readonly sessionId: string,
     public readonly name: string,
     public readonly color: string | undefined,
-    public readonly createdAt: Date
+    public readonly createdAt: Date,
+    public readonly points: number
   ) {}
 
   static create(data: TeamType): Team {
@@ -15,7 +16,8 @@ export class Team {
       data.sessionId,
       data.name,
       data.color,
-      data.createdAt
+      data.createdAt,
+      data.points
     );
   }
 
@@ -48,6 +50,7 @@ export class Team {
       name: this.name,
       color: this.color,
       createdAt: this.createdAt,
+      points: this.points,
     };
   }
 }
