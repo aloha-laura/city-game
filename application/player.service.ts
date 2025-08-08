@@ -180,6 +180,20 @@ export class PlayerService {
     return true;
   }
 
+  static async deleteAllPlayers(sessionId: string): Promise<boolean> {
+    const { error } = await supabase
+      .from(TABLES.PLAYERS)
+      .delete()
+      .eq('session_id', sessionId);
+
+    if (error) {
+      console.error('Error deleting all players:', error);
+      return false;
+    }
+
+    return true;
+  }
+
   static async getPlayersWithTeams(
     sessionId: string
   ): Promise<PlayerWithTeam[]> {

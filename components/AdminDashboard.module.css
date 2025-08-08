@@ -143,6 +143,40 @@
   opacity: 0.9;
 }
 
+.deleteAllButton {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-danger);
+  color: white;
+  border-radius: var(--border-radius-md);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  transition: opacity var(--transition-fast);
+}
+
+.deleteAllButton:hover {
+  opacity: 0.8;
+}
+
+.resetButton {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--color-warning, #f59e0b);
+  color: white;
+  border-radius: var(--border-radius-md);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-sm);
+  transition: opacity var(--transition-fast);
+}
+
+.resetButton:hover {
+  opacity: 0.8;
+}
+
+.teamActions {
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
 .teamsList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -212,6 +246,15 @@
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-md);
+  }
+
+  .teamActions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .teamActions button {
+    width: 100%;
   }
 
   .playerCard {

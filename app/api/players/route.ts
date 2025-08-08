@@ -66,3 +66,34 @@ export async function POST(request: NextRequest) {
     );
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const searchParams = request.nextUrl.searchParams;
+    const sessionId = searchParams.get('sessionId');
+
+    if (!sessionId) {
+      return NextResponse.json(
+        { error: 'sessionId parameter is required' },
+        { status: 400 }
+      );
+    }
+
+    const success = await PlayerService.deleteAllPlayers(sessionId);
+
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Failed to delete all players' },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error('Error deleting all players:', error);
+    return NextResponse.json(
+      { error: 'Failed to delete all players' },
+      { status: 500 }
+    );
+  }
+}

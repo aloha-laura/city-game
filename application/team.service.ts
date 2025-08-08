@@ -247,4 +247,32 @@ export class TeamService {
 
     return true;
   }
+
+  static async deleteAllTeams(sessionId: string): Promise<boolean> {
+    const { error } = await supabase
+      .from(TABLES.TEAMS)
+      .delete()
+      .eq('session_id', sessionId);
+
+    if (error) {
+      console.error('Error deleting all teams:', error);
+      return false;
+    }
+
+    return true;
+  }
+
+  static async resetAllPoints(sessionId: string): Promise<boolean> {
+    const { error } = await supabase
+      .from(TABLES.TEAMS)
+      .update({ points: 0 })
+      .eq('session_id', sessionId);
+
+    if (error) {
+      console.error('Error resetting all points:', error);
+      return false;
+    }
+
+    return true;
+  }
 }

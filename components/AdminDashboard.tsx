@@ -83,6 +83,59 @@ export default function AdminDashboard({ playerId }: AdminDashboardProps) {
     }
   };
 
+  const handleDeleteAllPlayers = async () => {
+    if (!sessionId) return;
+    if (!confirm('Delete ALL players? This action cannot be undone!')) return;
+
+    try {
+      const response = await fetch(`/api/players?sessionId=${sessionId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) throw new Error('Failed to delete all players');
+
+      await loadData();
+    } catch (err: any) {
+      alert(err.message || 'Deletion error');
+    }
+  };
+
+  const handleDeleteAllTeams = async () => {
+    if (!sessionId) return;
+    if (!confirm('Delete ALL teams? This action cannot be undone!')) return;
+
+    try {
+      const response = await fetch(`/api/teams?sessionId=${sessionId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) throw new Error('Failed to delete all teams');
+
+      await loadData();
+    } catch (err: any) {
+      alert(err.message || 'Deletion error');
+    }
+  };
+
+  const handleResetAllPoints = async () => {
+    if (!sessionId) return;
+    if (!confirm('Reset all team points to 0?')) return;
+
+    try {
+      const response = await fetch('/api/teams/reset-points', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ sessionId }),
+      });
+
+      if (!response.ok) throw new Error('Failed to reset points');
+
+      await loadData();
+    } catch (err: any) {
+      alert(err.message || 'Reset error');
+    }
+  };
+
   const handleAssignPlayerToTeam = async (
     playerIdToAssign: string,
     teamId: string
@@ -130,7 +183,18 @@ export default function AdminDashboard({ playerId }: AdminDashboardProps) {
       </section>
 
       <section className={styles.section}>
-        <h2 className={styles.sectionTitle}>Players</h2>
+        <div className={styles.sectionHeader}>
+          <h2 className={styles.sectionTitle}>Players</h2>
+          {players.length > 0 && (
+            <button
+              onClick={handleDeleteAllPlayers}
+              className={styles.deleteAllButton}
+              title="Delete all players"
+            >
+              🗑️ Delete all
+            </button>
+          )}
+        </div>
         {players.length === 0 ? (
           <p className={styles.emptyMessage}>No players yet</p>
         ) : (
@@ -188,9 +252,29 @@ export default function AdminDashboard({ playerId }: AdminDashboardProps) {
       <section className={styles.section}>
         <div className={styles.sectionHeader}>
           <h2 className={styles.sectionTitle}>Teams</h2>
-          <button onClick={handleCreateTeam} className={styles.createButton}>
-            + Create team
-          </button>
+          <div className={styles.teamActions}>
+            <button onClick={handleCreateTeam} className={styles.createButton}>
+              + Create team
+            </button>
+            {teams.length > 0 && (
+              <>
+                <button
+                  onClick={handleResetAllPoints}
+                  className={styles.resetButton}
+                  title="Reset all points to 0"
+                >
+                  🔄 Reset points
+                </button>
+                <button
+                  onClick={handleDeleteAllTeams}
+                  className={styles.deleteAllButton}
+                  title="Delete all teams"
+                >
+                  🗑️ Delete all
+                </button>
+              </>
+            )}
+          </div>
         </div>
         {teams.length === 0 ? (
           <p className={styles.emptyMessage}>No teams created</p>
