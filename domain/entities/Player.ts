@@ -27,6 +27,10 @@ export class Player {
     return role === 'admin' || role === 'player';
   }
 
+  static isAdmin(role: string): boolean {
+    return role === 'admin';
+  }
+
   isAdmin(): boolean {
     return this.role === 'admin';
   }
