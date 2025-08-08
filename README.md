@@ -1,66 +1,42 @@
-# City Game - Team Management Application
+# City Game
 
-Web application to organize city games with team and player management.
+A web application for organizing city games where teams explore the city and take photos of opposing team members to earn points.
 
-## Architecture
+## About
 
-The project follows a simplified **Domain-Driven Design (DDD)** architecture:
+This is an MVP for a city game where players are divided into teams and walk around the city. The main mechanic is taking photos of players from opposing teams to score points. Admins validate the photos in real-time and award points to teams.
 
-```
-city-game/
-├── domain/              # Pure business logic
-│   ├── entities/        # Entities with validation
-│   └── types.ts         # TypeScript types
-│
-├── application/         # Business services
-│   ├── player.service.ts
-│   ├── team.service.ts
-│   └── session.service.ts
-│
-├── infrastructure/      # Data access
-│   └── database.ts      # Supabase configuration
-│
-├── app/                 # Next.js pages
-│   ├── page.tsx         # Home page
-│   ├── admin/           # Admin interface
-│   ├── player/          # Player interface
-│   └── api/             # API Routes
-│
-├── components/          # Reusable components
-└── database/            # SQL scripts
-```
-
-## Prerequisites
-
-- Node.js 18+ and npm
-- A Supabase account (free)
+This can be extended in the future to include photo challenges and other game modes.
 
 ## Installation
 
-### 1. Create a Supabase project and configure the database
+### Prerequisites
 
-1. Go to [supabase.com](https://supabase.com)
-2. Create an account and a new project
-3. In the **SQL Editor** tab
-4. Open the `database/schema.sql` file from this project
-5. Copy all the content of `database/schema.sql` and run it in the SQL editor
-6. Configure the environment variables:
+- Node.js 18+
+- A [Supabase](https://supabase.com) account (free tier works fine)
 
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-```
+### Setup
 
-### 2. Install dependencies
+1. **Create a Supabase project**
+   - Go to [supabase.com](https://supabase.com) and create a new project
+   - In the SQL Editor, run the content of `database/schema.sql`
 
-```bash
-npm install
-```
+2. **Configure environment variables**
 
-### 3. Run the application locally
+   Create a `.env.local` file:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+   ```
 
-```bash
-npm run dev
-```
+3. **Install dependencies**
+   ```bash
+   npm install
+   ```
 
-The application will be accessible at [http://localhost:3000](http://localhost:3000)
+4. **Run locally**
+   ```bash
+   npm run dev
+   ```
+
+The app will be available at [http://localhost:3000](http://localhost:3000)
